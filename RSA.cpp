@@ -1,6 +1,7 @@
 
 #include <cmath>
 #include <iostream>
+#include <fstreama>
 using namespace std;
 
 
