@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <cstring>
 using namespace std;
 
 struct EncryptedChar{
@@ -47,14 +48,38 @@ std::vector<EncryptedChar>  readInput(std::string fileName)
 		//std::cout << "The number of characters extracted is: " << myFile.gcount() << "\n";
 		int count = 0;
 		std::string allNums = inputStream.str();
+		char * allNums_dup = strdup(allNums.c_str());
 		std::string bufferStr = "";
 		int bufferInt = 0;
 		char curChar = ' ';
-		
-		std::cout << "The read file in string form is; " << allNums << "\n";
+		char * bufferCharPtr;
 		EncryptedChar ecStruct;
+
+
+
+		//first loop iteration
+	//	bufferCharPtr = strtok(allNums_dup,"\0");
+	//	bufferInt = atoi(bufferCharPtr);
+	//	ecStruct.c = bufferInt;
+	//	listOfChars.push_back(ecStruct);
+	//	std::cout << ": " << bufferInt << "\n";
+	//	count ++;
+	//	do
+	//	{
+	//		bufferCharPtr = strtok(NULL, "\0 ");
+	//		bufferInt = atoi(bufferCharPtr);
+	//		ecStruct.c = bufferInt;
+	//		listOfChars.push_back(ecStruct);
+	//		std::cout << count << ": " << bufferInt << "\n";
+	//		count ++;
+	//	}while(bufferCharPtr != NULL);		
+	//	free(allNums_dup);
+
+	//	std::cout << "The read file in string form is; " << allNums << "\n";
+		//EncryptedChar ecStruct;
 		while(std::getline(inputStream,bufferStr, ' '))
 		{
+		//	std::cout << "Str: " << bufferStr << " || ";
 			bufferInt = std::stoi(bufferStr);
 			ecStruct.c = bufferInt;
 			listOfChars.push_back(ecStruct);
