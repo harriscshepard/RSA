@@ -32,8 +32,41 @@ int decryptC(int encryptedChar)
 }
 int decryptC(int encryptedChar, int d, int n)
 {
-	int cd = pow(encryptedChar, d);
-	int m = cd % n;
+	int m = 0;
+	if(d >= 4)
+	{
+	
+		long int one = d - d/2;
+		long int two = d/2;
+		long int three = one/2;
+		one = one - one/2;
+		long int four = two/2;
+		two = two - two/2;
+	
+		//std::cout << "{1,2,3,4} = " << "{" << one << "," << two << "," << three << "," << four << "}\n";		
+	
+		one = pow(encryptedChar, one);
+		two = pow(encryptedChar, two);
+                three = pow(encryptedChar, three);
+                four = pow(encryptedChar, four);
+
+		one = one % n;
+		two = two % n;
+		three = three % n;
+		four = four % n;
+	
+//		std::cout << "{1,2,3,4} = " << "{" << one << "," << two << "," << three << "," << four << "}\n";
+		                //
+		m = (one * two * three * four) % n;
+
+	}
+	else
+	{
+		int cd = pow(encryptedChar, d);
+		m = cd % n;
+		std::cout << "cd: " << cd << "\n";
+//	std::cout << "m: " << m << "\n";
+	}
 	return m;
 }
 std::vector<EncryptedChar>  readInput(std::string fileName)
@@ -105,5 +138,13 @@ int main()
 {
 	std::string fileName = "example.txt";
 	std::vector<EncryptedChar> listOfChars = readInput(fileName);
+	int bufferInt = 0;
+	for(auto i = listOfChars.begin(); i != listOfChars.end(); i ++)
+	{
+		bufferInt = decryptC(i->c);
+		std::cout << "C is: " << i->c << "||";
+		(i)->m = bufferInt;
+		std::cout << "Decrypted M: " << bufferInt << "\n";			
+	}
 	return 0;
 }
