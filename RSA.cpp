@@ -46,17 +46,28 @@ std::vector<EncryptedChar>  readInput(std::string fileName)
 		inputStream << myFile.rdbuf();
 		//std::cout << "The number of characters extracted is: " << myFile.gcount() << "\n";
 		int count = 0;
+		std::string allNums = inputStream.str();
+		std::string bufferStr = "";
+		int bufferInt = 0;
 		char curChar = ' ';
 		
-		std::cout << "The read file in string form is; " << inputStream.str() << "\n";
+		std::cout << "The read file in string form is; " << allNums << "\n";
 		EncryptedChar ecStruct;
-		while (inputStream >> curChar)
+		while(std::getline(inputStream,bufferStr, ' '))
 		{
-			ecStruct.c = curChar; 
+			bufferInt = std::stoi(bufferStr);
+			ecStruct.c = bufferInt;
 			listOfChars.push_back(ecStruct);
-			std::cout << count << ": " << curChar << "\n";
+			std::cout << count << ": " << bufferInt << "\n";
 			count ++;
 		}
+		//while (inputStream >> curChar)
+		//{
+		//	ecStruct.c = curChar; 
+		//	listOfChars.push_back(ecStruct);
+		//	std::cout << count << ": " << curChar << "\n";
+		//	count ++;
+		//}
 		std::cout << "End reading file\n";
 	}
 
